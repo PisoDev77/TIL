@@ -1,5 +1,15 @@
 # HTML
 
+## sup, sub 태그
+```html
+    텍스트<sup>위첨자</sup>  
+    텍스트<sub>아래첨자</sub>
+```
+텍스트<sup>위첨자</sup>  
+텍스트<sub>아래첨자</sub>
+
+---
+
 ## details 태그
 ```html
 <details>
