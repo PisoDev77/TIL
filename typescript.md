@@ -390,3 +390,162 @@ JS에서도 사용가능
     const p = new Person()
     console.log(p.run());
     ```
+
+## 인터페이스
+JS에는 없어  
+객체의 타입을 정의하고 생김새를 가지도록 할 수 있다.  
+implements로 구현한다
+
+```typescript
+interface
+인터페이스는 정의 설계를 한다
+implement
+구현한다
+
+// 바로 중가로 할당하지않아
+interface Person {
+    name: string
+    age: number
+}
+
+//바로 사용되는 법
+const jang: Person = {
+    //person에 name과 age필요해짐
+    name: "JANG",
+    age:99
+}
+
+```
+implements
+```typescript
+
+interface Person {
+    name: string
+    run(): void
+}
+
+class Jang implements Person {
+    //설계에 맞는 구현을 해야함
+    constructor(
+        name: string
+    ){}
+
+    run(){
+        console.log(this.name)
+    }
+}
+
+// 더 많이 구현??????
+interface Animal {
+    name: string
+    run(): string
+}
+
+interface Person{
+    sayName(): string
+}
+
+// 아 더 추가할 수 있다는 뜻이구나 다중 인터페이스
+class JANG implements Animal, Person {
+    constructor(
+        name: string
+    ){}
+
+    run(){
+        console.log(this.name)
+    }
+
+    sayName() {
+        return "aaaa";
+    }
+}
+```
+
+extends와 interface
+```typescript
+interface Animal{
+    name?: string // ?는 꼭 넣을 필요없다.
+    run(): string
+}
+interface Person extends Animal{
+    sayName(): string
+    // extends 키워드 사용시 충돌 가능성이 있다.
+    // 그래서 제네릭이 있는데 그건 이후에
+}
+
+const jang:Person = {
+    name: "JANG",
+    run() {
+        return "sfdsf";
+    },
+    sayName() {
+        return "afdwv";
+    }
+}
+```
+
+## 타입가드
+    타입을 좁혀나가기 위한 과정
+    typeof 이미 JS에 존재
+```typescript
+function print(value:number | string):string{
+    if(typeof value === 'number') return String(value);
+    if(typeof value === 'string') return value;
+
+    // number 도 string도 아닐때
+    return value;
+}
+typeof를 활용한 타입가드 흐름을 제어하기위해 
+```
+in 연산자를 활용한 타입가드 JS에 이미 있음  
+객체가 특정 속성을 가지고 있는지 검사를 불리언으로 반환
+```typescript
+interface Dog{
+    name: string
+    bark(): "BARKBARK"
+}
+
+interface Cat{
+    name: string
+    meow(): "MEOW"
+}
+
+function sayAnimal(animal: Dog | Cat){
+    if("bark" in animal){
+        animal.bark();
+    }
+
+    if("meow" in animal){
+        animal.meow();
+    }
+}
+
+```
+
+instanceof  
+체이닝을 통해 객체검사를 함.
+```typescript
+//프로토타입의 체인을 검사함
+function getDate(date: Date | string): Date{
+    if(date instanceof Date){
+        return date
+    }
+
+    return new Date(date);
+}
+```
+사용자 정의 커스텀 타입가드  
+타입가드의 아쉬운 점 타입스크립트 다운 타입가드을 아직 모름
+```typescript
+function isDate(date: Date | string): date is Date{
+    return date instanceof Date;
+}
+function getDate(date: Date | string): Date{
+    if(isDate(date)){
+        return date
+    }
+
+    return new Date(date);
+}
+```
+
