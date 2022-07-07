@@ -549,3 +549,134 @@ function getDate(date: Date | string): Date{
 }
 ```
 
+## 열거형 (Enum)
+    의미있는 상수자료를 만들 수 있다.
+    enum + PascalCase 조합으로 생성
+
+```typescript
+//숫자 열거형
+enum Prize{
+    Gold = 100,
+    Silver,
+    Bronze
+
+    // 자동으로 1씩 증가
+    // 규칙적으로 지정하고 싶다면 전부 할당해줘야한다.
+}
+
+접는 상자로 접근 가능
+Prize.Gold
+Prize['Gold']
+```
+
+```typescript
+//문자형 열거
+enum Prize{
+    // 값을 모두 초기화 해야한다.
+    Gold = "GOLD",
+    Silver = "SILVER",
+    Bronze = "BRONZE"
+}
+```
+
+```typescript
+//혼합 열거는 지양하자
+enum Dummy{
+    First = 0,
+    Silver = 'Sliver'
+}
+```
+
+```typescript
+//리버스 매핑
+enum Order{
+    //문자열은 지원하지 않는다 
+    First = 1,
+    Second = 2,
+    Third = 3
+}
+
+const fstVal = Order.First; // 1 출력
+const keyoffstVal = Order[fstVal]; //"First" 출력
+```
+
+```typescript
+//const 열거
+// 기본적으로 불완전한 접근을 허용한다
+const enum Desk{
+    Color = "White",
+    Width = 1400
+}
+
+typeof Desk 로 비교하게 된다.
+컴파일 후 제거된다,
+```
+열거형 활용
+
+```typescript
+enum Language {
+    TypeScript = "TS",
+    JavaScript = "JS",
+    Java = "JAVA",
+    Ruby = "RB"
+}
+
+//type Lang = "TS | "JS";
+//type LangCode = keyof Language;
+type LangCode = keyof typeof Language;
+
+function getLang(langCode: string){
+    console.log(langCode);
+}
+```
+
+## 논리 연산자 활용
+타입 별칭 type alias
+```typescript
+type str = string;
+type arr = num[];
+```
+
+Union 타입(합집합)
+```typescript
+type StringOrNumber = string | number;
+```
+
+
+Intersection 타입(교집합)
+```typescript
+type Person = {
+    name: string
+    age: number
+}
+type Me = {
+    name: string
+    gender: "M" | "F"
+}
+
+const obj: Person & Me = {
+    name: "Jang",
+    age: 10,
+    gender: "M"
+}
+```
+
+Union 타입 판별
+```typescript
+//추론하기 어려운 Union 타입은 피하자
+interface Male{
+    name: string
+    age: number
+    genderType: "M"
+}
+interface Female{
+    name: string
+    age: number
+    genderType: "F"
+}
+type Person = Male | Female;
+
+function create({name, age, genderType}: Male | Female){
+
+}
+```
