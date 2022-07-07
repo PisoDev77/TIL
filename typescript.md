@@ -77,6 +77,22 @@
     // 둘이 같은 의미이다.
     ```
 
-+ 리터럴 타입
++ 리터럴 타입  
+    ; let과 const의 차이로 인한 것 같은데 타입스크립트에서의 특징은 아직 잘 모르겠다.
+    ```typescript
+    let letStr = "string";
+    // string으로 선언된다. 재할당이 가능한 let이기 떄문에
+    const constStr = "string"
+    // "string" 값 자체로 선언된다.
+    ```
 
-+ 튜플 타입
++ 튜플 타입  
+    ; 한 배열에 여러가지 자료형이 섞인 경우에 활용  
+        __길이__ 고정 __인덱스__ 타입 고정  
+    읽기전용으로 활용 가능하다.
+    ```typescript
+    const tuple = [];
+    default tuple:(string | number) //유니온 나중에 나온다.
+    tuple:[number, string] = [1,"str"]; // 길이 고정 / 타입 지정
+    tuple:[number, ...string[]] = [0,"a","b"] // 길이 가변 _ 타입 지정
+    ```
