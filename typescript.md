@@ -112,6 +112,281 @@
     tuple:[number, ...string[]] = [0,"a","b"] // 길이 가변 _ 타입 지정
     ```
 
-## 클래스
+## TS의 클래스
     Class 클래스?
-    ㄴㄴㄴ
+    ES2015 부터 등장
+    C#에서 많이 유래됨
+    JS 클래스와 TS 클래스가 조금 다르다.
+
+    ```typescript
+    //파스칼케이드 문자가 끊길때마다 대문자
+    class Person = {
+        name: string;
+        age: number;
+        //readonly 속성 private??
+        readonly location: string
+    }
+
+    const p = new = Person();
+    // p는 인스턴스; 메모리에 할당된 고유한 것
+    ```
+
++ 생성자 ;초기화를 담당한다.
+    ```typescript
+    class Person = {
+        name: string;
+        age: number;
+        //readonly 속성 private??
+        readonly location: string
+
+        constructor(name:string, age:number) {
+            this.name = name;
+            this.age = age;
+        }
+    }
+    ```
+
++ 메소드 method ; 함수와 비슷 객체의 행동을 의미
+    ```typescript
+    class Person = {
+        name: string;
+        age: number;
+        readonly location: string
+
+        constructor(name:string, age:number) {
+            this.name = name;
+            this.age = age;
+        }
+
+        information(): string{
+            return `${this.name}의 나이는 ${this.age}살입니다.`;
+        }
+    }
+    ```
++ 제어자 getter setter
+    ```typescript
+    class Person = {
+        name: string;
+        private _age: number; 
+
+        constructor(name:string, age:number) {
+            this.name = name;
+            this._age = age;
+        }
+
+        get age(){
+            if(this._age === 0){
+                return "설정되지 않음";
+            }
+            return this.age;
+        }
+
+        set age(age){
+            if(typeof age !== number){
+                this._age = 0;
+            }
+            this._age = age;
+        }
+    }
+
+    const p = new Person("JANG",20);
+    console.log(p.age);
+    ```
+
++ Extends 상속 / 확장
+    ```typescript
+    class 기본 {
+        result(){
+            return 'Base';
+        }
+    }
+
+    class 파생 extends 기본{
+        //오버라이딩 덮어쓰기
+        result(){
+            return "DERIVEED";
+        }
+
+    }
+
+    const de = new 파생();
+    de.result();
+    // BASE 출력
+    ```
+
++ Super 생성자 상위 클래스  
+JS에서도 사용가능
+
+    ```typescript
+    class Animal {
+        name:string;
+
+        constructor(name: string){
+            this.name = name;
+        }
+
+        sayName(){
+            return "동물? " + this.name;
+        }
+    }
+
+    class Person extends Animal {
+        constructor(name:string){
+            super(name);
+            //super는 this 전에 사용되어야 한다.
+        }
+
+        sayName(){
+            return "사람? " + this.name;
+        }
+    }
+    ```
+
++ 접근제어자 ;속성과 메서드에 접근을 제한할 수 있다.  
+    API 흉내 및 규칙 강제  
+    public private protected 모두 타입스크립트 고유 문법  
+    JS 자체의 private도 존재한다.
+    
+    ```typescript
+    class Person {
+        public name: string;
+        private age: number;
+        //서버클래스까지 접근 가능
+        protected gender: "M" | "F";
+
+        constructor(name: string, age: number, gender: "M" | "F"){
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+        }
+
+        sayName(){
+            return this.name;
+        }
+
+        protected sayAge(){
+            return this.age;
+        }
+
+        private sayGender(){
+            return this.gender;
+        }
+    }
+
+    class Me {
+        constructor(name: string, age: number, gender: "M" | "F"){
+            super(name,age,gender);
+        }
+
+        sayInfo(){
+            return super.sayName() + super.sayAge(); //여기선 서브클래스라 에러 안남 
+            //sayGender는 나타나지도 않음
+        }
+    }
+
+    const p = new Person("JANG", 10, "M");
+    p.sayAge() 는 에러가 난다 접근제어자로 인해
+
+    ```
++ static JS에서도 가능  
+    인스턴스화 하지않고 사용가능 전역에 생성?   
+    new로 인스턴스화 하지않기 때문에 조심해야한다.  
+    ```typescript
+    class StaticClass {
+        type = "Type";
+
+        test(){
+
+        }
+    }
+
+    StaticClass. 아무것도 접근 불가능
+
+    class StaticClass {
+        static type = "Type";
+
+        static test(){
+
+        }
+    }
+
+    StaticClass. 이제 접근 가능
+    ```
+
++ ReadOnly  
+    수정 막는 역할
+    ```typescript
+    const Person {
+        name: string;
+        readonly age: number;
+
+        constructor(name: string, age: number){
+            this.name = name;
+            this.age = age;
+        }
+
+        set함수로도 변경안됨
+        . 으로도 변경 안됨
+    }
+    ```
+
++ 추상 클래스  
+    JS에는 없다. 객체지향에서 많이 쓰임  
+    abstract를 선언한 클래스 직접 인스턴스화 될 수 없는 클래스
+    추상클래스의 메소드는 무조건 구현
+
+    ```typescript
+    class Animal{
+        hello()
+
+        run(){
+            return this.hell() + "  run!";
+        }
+    }
+
+    //직접 인스턴스화 안된다. new Animal 안되게
+    abstract class Animal{
+        abstract hello(): string
+
+        run(){
+            return this.hell() + "  run!";
+        }
+    }
+
+    class Person extends Animal{
+        // hello를 꼭 구현해야한다.
+        hello(){
+            return "HELLO FROM PERSON";
+        }
+    }
+    const person = new Person();
+    ```
+
++ 매개변수 parameter properties  
+    ```typescript
+    //안그래도 귀찮았던 생성자 매개변수 쓰기 귀찮았는데;
+    class Person{
+        constructor(
+            public name: string,
+            private age: number,
+            protected gender: "M" | "f"
+        ){ 매우 편해짐
+    }
+    ```
+
++ 메소드 오버라이딩  
+    ; 매우 객체지향적임을 알 수 있다.
+    ```typescript
+    class Animal {
+        run(){
+            return "Animal이 달리다.';
+        }
+    }
+
+    class Person extends Animal {
+
+    }
+
+    const p = new Person()
+    console.log(p.run());
+    ```
