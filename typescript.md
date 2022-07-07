@@ -29,6 +29,21 @@
 
     // 기본값을 지정할 수도 있다.]
     ```
+    ; 원시타입들로 undefined, null, any, unkown 등이 있다.
+    ```typescript
+    undefined나 null를 혼용하는 것은 지양하자.
+    물론 두가지 다 타입지정가능하다.
+
+    const nu:null = null;
+    const un:undefined = undefined;
+
+    any는 지양하자. any는 JS에서 동작과 다를 바 없다.
+    접근가능한 범위가 매우 넓기 때문에, 조심할 필요가 있다.
+    noImplicity 혹은 strict 옵션을 True로 타입스크립트 설정에 추가를 권장한다.
+
+    unknown은 최상위 타입인데, 이는 any와 다르지 않지만
+    타입가드나 assertion과 함께 좀 더 엄격한 코드가 작성가능하다.
+    ```
 
 + 객체 타입  
     ; 객체에 리터럴를 활용하여 타입을 지정할 수 있다.
@@ -96,3 +111,7 @@
     tuple:[number, string] = [1,"str"]; // 길이 고정 / 타입 지정
     tuple:[number, ...string[]] = [0,"a","b"] // 길이 가변 _ 타입 지정
     ```
+
+## 클래스
+    Class 클래스?
+    ㄴㄴㄴ
