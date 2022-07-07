@@ -1,5 +1,18 @@
 # HTML
 
+## image 태그
+```html
+    <img 
+        src=""
+        alt=""
+        srcset=""
+        sizes=""
+    >
+```
+- src 
+- alt
+- srcset
+- sizes
 ## sup, sub 태그
 ```html
     텍스트<sup>위첨자</sup>  
