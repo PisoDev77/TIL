@@ -77,4 +77,38 @@ Object.assign()객체 병합
 ## State 끌어올리기
 원래 자식요소에 있던 state를 부모에게 prop으로 받을 수 있게 끌어올리는 방법
 
+## Hook
+useState는 Hook의 하나  
+재사용문제 때문에 생겨남.  
+복잡한 컴포넌트는 이해하기 어렵고 class는 사람과 기계를 혼동시킴.  
+
+
+## Effect Hook useEffect
+
+```javascript
+    // componentDidMount 처럼 동작 
+    // mount 후 동작
+    useEffect(() => {
+
+    }, [])
+    // 이 배열을 의존성 배열이라 부름
+
+    // componentDidMount + componentDidUpdate 처럼 동작 
+    useEffect(() => {
+
+    })
+
+    //WillUnmount는 어떻게?
+    useEffect(() => {
+        return () => {
+            //d여기가 unMount시 실행
+            cleanup;
+        }
+    }, [])
+```
+
+
+## 리스트
+Array.prototype.map 을 이용하여 사용가능 리스트와 key 공식문서 참조
+
 

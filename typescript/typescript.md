@@ -677,6 +677,6 @@ interface Female{
 type Person = Male | Female;
 
 function create({name, age, genderType}: Male | Female){
-
+    
 }
 ```

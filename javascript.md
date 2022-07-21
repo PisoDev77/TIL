@@ -100,3 +100,10 @@
         const strArr = [...str];
          //rest의 개념도 확인해두자
         ```
+
+## Observer Pattern
+    Subscriber, Listener 등으로도 불리며 
+    일어나는지 지켜보는 것을 옵저버 패턴이라 함.
+
+
+## !! 논리 연산자
