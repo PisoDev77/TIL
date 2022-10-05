@@ -1,8 +1,6 @@
+let exam1 = { data: "example 1"};
+let exam2 = {...exam1};
 
-const arr = Array(3).fill("채워");
-const arr2 = [].fill.call({length:3},"call로 채워")
-console.log(arr, typeof arr);
-console.log(arr2, typeof arr2);
+exam2.data = "EXAM 2";
 
-const newArr = Array(3);
-console.log(newArr)
+console.log(exam1.data);
