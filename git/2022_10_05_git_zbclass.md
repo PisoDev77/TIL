@@ -37,6 +37,23 @@
  - MIT LICENSE
  	- it means this is open source
 
+
+## Conventional Commit
+
+ - [Commit Convention By Angular Team](https://www.conventionalcommits.org/ko/v1.0.0/)
+
+ - title of commit 
+ 	- 40 letters
+
+ 	- Prefix
+ 	- feat
+ 	- fix
+ 	- docs
+ 	- conf
+ 	- build
+ 	- ci
+ 	- refactor
+ 	- BREAKING CHANGE
 ---
 $O(n)$
 
